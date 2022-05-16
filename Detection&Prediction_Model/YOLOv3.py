@@ -7,11 +7,14 @@ neural_network = cv2.dnn.readNet('yolov3.weights', 'yolov3.cfg')
 
 # Extracting object names for the model prediction
 object_classes = []     # Loading names into a list
+
 with open('coco.names', 'r') as f:
+    
     object_classes = f.read().splitlines()
 
 # Input from camera can be taken
 cap = cv2.VideoCapture(0)
+
 # img = cv2.imread('image.jpg')    //This can be used when input is an image
 
 
@@ -25,8 +28,10 @@ while True:
 
 # Normalising the Input Image from pixel-to-pixel value and converting it from JPG to RGB format
     blob = cv2.dnn.blobFromImage(img, 1/255, (416, 416), (0, 0, 0), swapRB=True, crop=False)
+    
     # Setting the Input image from blob to the network
     neural_network.setInput(blob)
+    
     # Provides the bounding information and feature extraction from forward layers
     Output_Layer = neural_network.getUnconnectedOutLayersNames()
     layerOutputs = neural_network.forward(Output_Layer)
