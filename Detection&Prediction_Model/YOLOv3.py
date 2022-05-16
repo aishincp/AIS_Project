@@ -24,9 +24,9 @@ while True:
     height, width, _ = img.shape
 
 # Normalising the Input Image from pixel-to-pixel value and converting it from JPG to RGB format
-    Normalizing_Layer = cv2.dnn.blobFromImage(img, 1/255, (416, 416), (0, 0, 0), swapRB=True, crop=False)
+    blob = cv2.dnn.blobFromImage(img, 1/255, (416, 416), (0, 0, 0), swapRB=True, crop=False)
     # Setting the Input image from blob to the network
-    neural_network.setInput(Normalizing_Layer)
+    neural_network.setInput(blob)
     # Provides the bounding information and feature extraction from forward layers
     Output_Layer = neural_network.getUnconnectedOutLayersNames()
     layerOutputs = neural_network.forward(Output_Layer)
